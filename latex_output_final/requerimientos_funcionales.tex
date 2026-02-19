@@ -1,0 +1,208 @@
+\begin{longtable}{|p{0.28\textwidth}|p{0.67\textwidth}|}
+\caption{Ingresar al sistema} \label{tab:rf-us-1} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continuación}} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\textit{Continúa en la siguiente página}} \\
+\endfoot
+\hline
+\endlastfoot
+\textbf{Id del requerimiento:} & RF-US-1 \\
+\hline
+\textbf{Nombre:} & Ingresar al sistema \\
+\hline
+\textbf{Descripción:} & El sistema permitirá a los usuarios acceder a las funcionalidades correspondientes una vez que se autentiquen correctamente mediante sus credenciales. \\
+\hline
+\textbf{Datos de entrada:} & Correo electrónico \newline Password (Contraseña) \\
+\hline
+\textbf{Datos de salida:} & Acceso al sistema (pantalla principal). \newline Mensaje de error en caso de credenciales incorrectas. \\
+\hline
+\textbf{Pre-condiciones:} & 1. El usuario debe estar previamente registrado en el sistema. \newline 2. El sistema debe estar en funcionamiento. \newline 3. La base de datos debe estar disponible. \newline 4. El usuario no debe encontrarse bloqueado. \\
+\hline
+\textbf{Post-condiciones:} & En caso de éxito: \newline -Se crea una sesión activa para el usuario. \newline -El sistema redirige al panel principal correspondiente a su rol. \newline En caso de fallo: \newline -No se concede acceso al sistema. \newline -Se muestra un mensaje indicando el error. \\
+\hline
+\textbf{Proceso:} & 1. El usuario accede a la pantalla de inicio de sesión. \newline 2. El sistema muestra el formulario de autenticación. \newline 3. El usuario ingresa su nombre de usuario y contraseña. \newline 4. El usuario selecciona la opción “Iniciar sesión”. \newline 5. El sistema valida las credenciales contra la base de datos. \newline 6. Si las credenciales son correctas, el sistema permite el acceso al sistema. \newline 7. El sistema redirige al panel principal según el rol del usuario. \\
+\hline
+\textbf{Proceso Alternativo:} & Credenciales incorrectas \newline En el paso 5, si las credenciales no coinciden: \newline -El sistema muestra un mensaje de error. \newline -El sistema permite reintentar el ingreso. \newline Usuario bloqueado \newline Fallo del sistema \newline Si ocurre un error en la base de datos: \newline -El sistema muestra un mensaje de error técnico. \newline -No se concede acceso. \\
+\hline
+\textbf{Prioridad:} & Alta \\
+\hline
+\textbf{Estabilidad:} & Alta \\
+\hline
+\textbf{Fuente del requerimiento:} & Entrevista con el cliente / Usuario administrador \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm}
+\begin{longtable}{|p{0.28\textwidth}|p{0.67\textwidth}|}
+\caption{Registrar usuario} \label{tab:rf-us-2} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continuación}} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\textit{Continúa en la siguiente página}} \\
+\endfoot
+\hline
+\endlastfoot
+\textbf{Id del requerimiento:} & RF-US-2 \\
+\hline
+\textbf{Nombre:} & Registrar usuario \\
+\hline
+\textbf{Descripción:} & El sistema permitirá al usuario con rol de administrador registrar nuevos usuarios y asignarle un rol. \\
+\hline
+\textbf{Datos de entrada:} & Nombres \newline Apellido paterno \newline Apellido materno \newline Usuario \newline Email \newline Password (Contraseña) \newline Rol de usuario \newline Estado del usuario \\
+\hline
+\textbf{Datos de salida:} & En caso de éxito: \newline -Mensaje: "El usuario ha sido registrado correctamente" \newline En caso de error: \newline -"El correo electrónico ya está registrado" \newline -"Formato de correo inválido" \\
+\hline
+\textbf{Pre-condiciones:} & 1. El usuario administrador debe haber iniciado sesión correctamente. \newline 2. El sistema debe estar en funcionamiento. \newline 3. La base de datos debe estar disponible. \\
+\hline
+\textbf{Post-condiciones:} & En caso de éxito: \newline -Se crea un nuevo registro de usuario en la base de datos. \newline -Se asigna el rol y estado correspondiente. \newline -El nuevo usuario podrá iniciar sesión en el sistema. \newline En caso de fallo: \newline -No se crea ningún registro en la base de datos. \newline -Se muestra el mensaje de error correspondiente. \\
+\hline
+\textbf{Proceso:} & 1. El administrador accede a la opción “Registrar usuario”. \newline 2. El sistema muestra el formulario de registro. \newline 3. El administrador ingresa los datos requeridos. \newline 4. El sistema valida que: \newline -El correo electrónico tenga un formato válido. \newline -El correo electrónico no esté registrado previamente. \newline 5. Si los datos son correctos, el sistema: \newline -Crea el nuevo registro en la base de datos. \newline -Asigna el rol y estado correspondiente. \newline 6. El sistema muestra el mensaje: \newline "El usuario ha sido registrado correctamente". \\
+\hline
+\textbf{Proceso Alternativo:} & Correo electrónico duplicado \newline 1. En el paso 4, el sistema detecta que el correo ya existe. \newline 2. El sistema detiene el proceso. \newline 3. Muestra el mensaje: \newline "El correo electrónico ya está registrado". \newline Formato de correo inválido \newline 1. En el paso 4, el sistema detecta que el correo no cumple con el formato estándar. \newline 2. El sistema detiene el proceso. \newline 3. Muestra el mensaje: \newline "Formato de correo inválido". \\
+\hline
+\textbf{Prioridad:} & Media \\
+\hline
+\textbf{Estabilidad:} & Alta \\
+\hline
+\textbf{Fuente del requerimiento:} & Entrevista con el cliente / Usuario administrador \\
+\hline
+\textbf{Requerimientos relacionados:} & RF-US-1 \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm}
+\begin{longtable}{|p{0.28\textwidth}|p{0.67\textwidth}|}
+\caption{Consultar usuarios} \label{tab:rf-us-3} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continuación}} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\textit{Continúa en la siguiente página}} \\
+\endfoot
+\hline
+\endlastfoot
+\textbf{Id del requerimiento:} & RF-US-3 \\
+\hline
+\textbf{Nombre:} & Consultar usuarios \\
+\hline
+\textbf{Descripción:} & El sistema permitirá al usuario con rol de administrador consultar los usuarios registrados. \\
+\hline
+\textbf{Datos de entrada:} & No se requieren datos de entrada \\
+\hline
+\textbf{Datos de salida:} & Éxito: \newline -Lista de los usuarios registrados con sus datos. \newline Error: \newline -"No se encontraron usuarios que coincidan con la búsqueda". \\
+\hline
+\textbf{Pre-condiciones:} & 1. El administrador debe haber iniciado sesión correctamente. \newline 2. El sistema debe estar en funcionamiento. \newline 3. La base de datos debe estar disponible. \\
+\hline
+\textbf{Post-condiciones:} & En caso de éxito: \newline -Se muestra una lista paginada de los usuarios registrados. \newline En caso de fallo: \newline -Se muestra el mensaje correspondiente si no existen registros. \\
+\hline
+\textbf{Proceso:} & 1. El administrador solicita visualizar el listado de usuarios. \newline 2. El sistema consulta la base de datos para obtener los usuarios registrados. \newline 3. El sistema organiza los resultados en formato paginado. \newline 4. El sistema muestra la lista de usuarios con sus datos correspondientes. \\
+\hline
+\textbf{Proceso Alternativo:} & Caso A: Sin resultados \newline 1. En el paso 2 del flujo principal, el sistema realiza la consulta en la base de datos. \newline 2. No se encuentran usuarios registrados. \newline 3. El sistema muestra el mensaje "No se encontraron usuarios que coincidan con la búsqueda". \\
+\hline
+\textbf{Prioridad:} & Media \\
+\hline
+\textbf{Estabilidad:} & Alta \\
+\hline
+\textbf{Fuente del requerimiento:} & Entrevista con el cliente / Usuario administrador \\
+\hline
+\textbf{Requerimientos relacionados:} & RF-US-1 \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm}
+\begin{longtable}{|p{0.28\textwidth}|p{0.67\textwidth}|}
+\caption{Modificar usuario} \label{tab:rf-us-4} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continuación}} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\textit{Continúa en la siguiente página}} \\
+\endfoot
+\hline
+\endlastfoot
+\textbf{Id del requerimiento:} & RF-US-4 \\
+\hline
+\textbf{Nombre:} & Modificar usuario \\
+\hline
+\textbf{Descripción:} & El sistema permitirá al usuario con rol de administrador modificar información y permisos de los usuarios. \\
+\hline
+\textbf{Datos de entrada:} & Id del usuario \newline Nombres \newline Apellido paterno \newline Apellido materno \newline Usuario \newline Email \newline Password (Contraseña) \newline Rol de usuario \newline Estado del usuario \\
+\hline
+\textbf{Datos de salida:} & Éxito: \newline -"El usuario ha sido actualizado correctamente". \newline Error: \newline -"El usuario no existe". \newline -"El correo electrónico ya está registrado". \newline -"Formato de correo inválido". \\
+\hline
+\textbf{Pre-condiciones:} & 1. El administrador debe haber iniciado sesión correctamente. \newline 2. El usuario a modificar debe existir en la base de datos. \newline 3. El sistema debe estar en funcionamiento. \newline 4. La base de datos debe estar disponible. \\
+\hline
+\textbf{Post-condiciones:} & En caso de éxito: \newline -La información del usuario es actualizada en la base de datos. \newline -Se muestra un mensaje de confirmación. \newline En caso de fallo: \newline -No se realizan cambios en la base de datos. \newline -Se muestra el mensaje de error correspondiente. \\
+\hline
+\textbf{Proceso:} & 1. El administrador accede al listado de usuarios. \newline 2. El administrador selecciona el usuario que desea modificar. \newline 3. El sistema muestra la información actual del usuario. \newline 4. El administrador realiza las modificaciones necesarias. \newline 5. El sistema valida los datos ingresados. \newline 6. Si los datos son correctos, el sistema actualiza la información en la base de datos. \newline 7. El sistema muestra el mensaje "El usuario ha sido actualizado correctamente". \\
+\hline
+\textbf{Proceso Alternativo:} & Caso A: Usuario inexistente \newline 1. En el paso 2 del flujo principal, el sistema verifica que el usuario exista. \newline 2. Si no existe, el sistema detiene el proceso. \newline 3. El sistema muestra el mensaje "El usuario no existe". \newline Caso B: Correo electrónico duplicado \newline 1. En el paso 5 del flujo principal, el sistema detecta que el correo ya pertenece a otro usuario. \newline 2. El sistema detiene la actualización. \newline 3. El sistema muestra el mensaje "El correo electrónico ya está registrado". \newline Caso C: Formato de correo inválido \newline 1.En el paso 5 del flujo principal, el sistema detecta que el correo no cumple con el formato estándar. \newline 2. El sistema detiene el proceso. \newline 3. El sistema muestra el mensaje "Formato de correo inválido". \\
+\hline
+\textbf{Prioridad:} & Media \\
+\hline
+\textbf{Estabilidad:} & Alta \\
+\hline
+\textbf{Fuente del requerimiento:} & Entrevista con el cliente / Usuario administrador \\
+\hline
+\textbf{Requerimientos relacionados:} & RF-US-1, RF-US-3 \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm}
+\begin{longtable}{|p{0.28\textwidth}|p{0.67\textwidth}|}
+\caption{Eliminar usuario} \label{tab:rf-us-5} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continuación}} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\textit{Continúa en la siguiente página}} \\
+\endfoot
+\hline
+\endlastfoot
+\textbf{Id del requerimiento:} & RF-US-5 \\
+\hline
+\textbf{Nombre:} & Eliminar usuario \\
+\hline
+\textbf{Descripción:} & El sistema permitirá al usuario con rol de administrador eliminar usuarios. \\
+\hline
+\textbf{Datos de entrada:} & Id del usuario \\
+\hline
+\textbf{Datos de salida:} & Éxito: \newline -"El usuario ha sido eliminado correctamente". \newline Error: \newline -"El usuario no existe". \\
+\hline
+\textbf{Pre-condiciones:} & 1. El administrador debe haber iniciado sesión correctamente. \newline 2. El usuario a eliminar debe existir en la base de datos. \newline 3. El sistema debe estar en funcionamiento. \newline 4. La base de datos debe estar disponible. \\
+\hline
+\textbf{Post-condiciones:} & En caso de éxito: \newline -El usuario es eliminado de la base de datos. \newline -Se muestra un mensaje de confirmación. \newline En caso de fallo: \newline -No se elimina ningún registro. \newline -Se muestra el mensaje de error correspondiente. \\
+\hline
+\textbf{Proceso:} & 1. El administrador accede al listado de usuarios. \newline 2. El administrador selecciona el usuario que desea eliminar. \newline 3. El sistema solicita confirmación de la acción. \newline 4. El administrador confirma la eliminación. \newline 5. El sistema elimina el usuario de la base de datos. \newline 6. El sistema muestra el mensaje "El usuario ha sido eliminado correctamente". \\
+\hline
+\textbf{Proceso Alternativo:} & Caso A: Usuario inexistente \newline 1. En el paso 2 del flujo principal, el sistema verifica que el usuario exista. \newline 2. Si no existe, el sistema detiene el proceso. \newline 3. El sistema muestra el mensaje "El usuario no existe". \newline Caso B: Cancelación de la eliminación \newline 1. En el paso 4 del flujo principal, el administrador cancela la operación. \newline 2. El sistema no realiza ningún cambio. \newline 3. El sistema regresa al listado de usuarios. \\
+\hline
+\textbf{Prioridad:} & Media \\
+\hline
+\textbf{Estabilidad:} & Alta \\
+\hline
+\textbf{Fuente del requerimiento:} & Entrevista con el cliente / Usuario administrador \\
+\hline
+\textbf{Requerimientos relacionados:} & RF-US-1, RF-US-3 \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm}
