@@ -1,297 +1,259 @@
-# 🔧 Conversor Excel a LaTeX - VERSIÓN CORREGIDA
+🔧 Conversor Excel / Google Drive a LaTeX
+Versión 5.0 – Soporte Google Drive + Categoría en RNF
 
-## ✅ Problemas Solucionados
+Script profesional para convertir requerimientos (funcionales y no funcionales) desde:
 
-Esta versión corrige los siguientes problemas que tenía la versión anterior:
+📄 Archivo Excel local (.xlsx)
 
-1. **✓ Saltos de línea correctos**: Los saltos de línea del Excel ahora se convierten correctamente a `\\` en LaTeX
-2. **✓ Sin cortes de página**: Uso de `longtable` en lugar de `table` para que las tablas continúen en la siguiente página
-3. **✓ Mejor espaciado**: Texto con espaciado adecuado, no amontonado
-4. **✓ 106 páginas**: Mayor claridad y legibilidad (vs. 49 páginas anteriores comprimidas)
+☁️ Google Drive (archivo compartido)
 
-## 📦 Archivos Incluidos
+📊 Google Sheets (exportación automática a Excel)
 
-### Scripts Python
-- **`excel_to_latex_fixed.py`** - Script corregido (USAR ESTE)
-- `excel_to_latex.py` - Versión original (solo referencia)
-- `excel_to_latex_v2.py` - Versión con casos de uso (solo referencia)
+Genera automáticamente:
 
-### Archivos LaTeX Generados (carpeta `latex_output_fixed/`)
-- `requerimientos_funcionales.tex` - 41 requerimientos funcionales
-- `requerimientos_no_funcionales.tex` - 13 requerimientos no funcionales
-- `todos_los_requerimientos.tex` - Documento principal completo
-- `todos_los_requerimientos.pdf` - **PDF FINAL (106 páginas)**
-- `ejemplo_mejoras.pdf` - Documento explicativo de las mejoras
+requerimientos_funcionales.tex
 
-## 🚀 Uso del Script Corregido
+requerimientos_no_funcionales.tex
 
-### Instalación de Dependencias
+Usando longtable para evitar cortes de página y mejorar la presentación académica.
 
-```bash
-# Python y pandas
-pip install pandas openpyxl --break-system-packages
+🚀 Novedades de la Versión 5.0
+✅ 1. Soporte completo para Google Drive y Google Sheets
 
-# LaTeX (si no lo tienes)
-sudo apt-get install texlive-latex-base texlive-latex-extra
-```
+Ahora puedes ejecutar el script usando:
 
-### Generar Tablas LaTeX
+python excel_drive_a_latex.py ID_DRIVE
 
-```bash
-# Sintaxis básica
-python3 excel_to_latex.py <archivo_excel> [directorio_salida]
+o directamente con el link:
 
-# Ejemplo con tu archivo
-python3 excel_to_latex.py ERS-SGPI.xlsx mi_tesis/requerimientos/
+python excel_drive_a_latex.py https://docs.google.com/spreadsheets/d/ID/edit
 
-# Usar directorio por defecto (latex_output_fixed/)
-python3 excel_to_latex.py ERS-SGPI.xlsx
-```
+El script:
 
-### Compilar a PDF
+Detecta automáticamente si es Google Sheets
 
-```bash
-cd latex_output_fixed/
+Descarga el archivo
 
-# Primera pasada
-pdflatex todos_los_requerimientos.tex
+Lo convierte a .xlsx
 
-# Segunda pasada (para referencias cruzadas)
-pdflatex todos_los_requerimientos.tex
-```
+Genera los .tex
 
-## 📊 Ejemplo de Salida
+✅ 2. Nueva columna "Categoría" en RNF
 
-### Antes (Problemas) ❌
-```latex
-\textbf{Criterios de aceptación:} & Los usuarios pueden navegar\\ Los textos tienen significado\\ \\
-```
-**Problema**: Los `\\` aparecían literalmente en el texto
+Si el Excel contiene la columna:
 
-### Después (Corregido) ✅
-```latex
-\textbf{Criterios de aceptación:} & Los usuarios pueden navegar entre módulos sin perderse. \\ 
-Los textos, botones e iconos tienen significado claro. \\ 
-Los procesos principales se completan en menos de 3 pasos. \\
-```
-**Resultado**: Saltos de línea correctos y legibles
+Categoria
 
-## 🎯 Características Principales
+Y el requerimiento es No Funcional (RNF), el script agregará automáticamente:
 
-### 1. Uso de `longtable`
+\textbf{Categoría:} & Seguridad \\
 
-```latex
+Esto solo aplica a la hoja:
+
+Req. No Funcionales
+✅ 3. Uso de longtable (sin cortes de página)
+
+Cada requerimiento usa:
+
 \begin{longtable}{|p{0.28\textwidth}|p{0.67\textwidth}|}
-% La tabla puede ocupar múltiples páginas sin cortarse
-\end{longtable}
-```
 
-**Ventajas:**
-- ✅ No se corta en el pie de página
-- ✅ Encabezados se repiten en cada página
-- ✅ Muestra "Continúa en la siguiente página"
-- ✅ Ideal para requerimientos largos
+Ventajas:
 
-### 2. Procesamiento de Saltos de Línea
+No se cortan en el pie de página
 
-El script detecta y convierte:
-- `\n` del Excel → `\\` de LaTeX
-- `\r\n` del Excel → `\\` de LaTeX
-- Múltiples saltos → Espaciado correcto
+Se repiten encabezados automáticamente
 
-### 3. Espaciado Mejorado
+Muestra "Continúa en la siguiente página"
 
-```latex
-\setlength{\LTpre}{1em}           % Espacio antes de tabla
-\setlength{\LTpost}{1em}          % Espacio después de tabla
-\renewcommand{\arraystretch}{1.3} % Altura de filas
-\vspace{0.5cm}                    % Entre tablas
-```
+Ideal para tesis largas
 
-## 📋 Formato de Requerimientos
+📂 Estructura Esperada del Excel
+Hoja 1:
+Req. Funcionales
+Hoja 2:
+Req. No Funcionales
+📋 Columnas Detectadas Automáticamente
 
-### Requerimientos Funcionales (RF)
-Incluye:
-- Id del requerimiento
-- Nombre
-- Descripción
-- Datos de entrada/salida
-- Pre-condiciones/Post-condiciones
-- Proceso y Proceso Alternativo
-- Prioridad y Estabilidad
-- Fuente del requerimiento
-- Requerimientos relacionados
+El script incluye los campos si existen:
 
-### Requerimientos No Funcionales (RNF)
-Incluye:
-- Id del requerimiento
-- Nombre
-- Tipo
-- Descripción
-- Pre-condiciones/Post-condiciones
-- Criterios de aceptación
-- Prioridad y Estabilidad
+Id
 
-## 🔍 Comparación de Resultados
+Nombre
 
-| Aspecto | Versión Original | Versión Corregida |
-|---------|------------------|-------------------|
-| Saltos de línea | Mostraba `\\` literal | Procesa correctamente |
-| Cortes de página | Se cortaban las tablas | Continúa sin cortes |
-| Espaciado | Texto amontonado | Espaciado adecuado |
-| Páginas totales | 49 páginas | 106 páginas |
-| Legibilidad | Regular | Excelente |
-| Tabla usada | `table` | `longtable` |
+Descripción / Descripcion
 
-## 📝 Integración en tu Tesis
+Datos de entrada
 
-### Preámbulo de tu Documento
+Datos de Salida
 
-```latex
-\documentclass[12pt]{report}
-\usepackage[utf8]{inputenc}
-\usepackage{geometry}
+Pre-condiciones
+
+Post Condiciones
+
+Criterios de aceptacion
+
+Proceso
+
+Proceso Alternativo
+
+Prioridad
+
+Estabilidad
+
+Fuente del requerimiento
+
+Requerimientos relacionados
+
+Categoria (solo RNF)
+
+Si una columna no existe o está vacía, simplemente no se imprime.
+
+📦 Instalación
+1️⃣ Dependencias Python
+pip install pandas openpyxl gdown
+2️⃣ LaTeX (si compilas PDF)
+
+Ubuntu/Debian:
+
+sudo apt install texlive-latex-base texlive-latex-extra
+▶️ Uso del Script
+🔹 Caso 1: Excel local
+python excel_drive_a_latex.py ERS_SMMY.xlsx
+🔹 Caso 2: Excel local con carpeta de salida
+python excel_drive_a_latex.py ERS_SMMY.xlsx latex_output_final
+🔹 Caso 3: Google Drive (archivo compartido)
+python excel_drive_a_latex.py 1AbCdEfGhIjKlMnOpQrStUvWxYz
+🔹 Caso 4: Google Sheets (link completo)
+python excel_drive_a_latex.py https://docs.google.com/spreadsheets/d/ID/edit
+📄 Archivos Generados
+
+En la carpeta:
+
+latex_output_final/
+
+Se crean:
+
+requerimientos_funcionales.tex
+
+requerimientos_no_funcionales.tex
+
+🧠 Procesamiento Inteligente del Texto
+
+El script:
+
+✔ Escapa caracteres especiales de LaTeX:
+
+&
+
+%
+
+$
+
+_
+
+#
+
+{ }
+
+~
+
+^
+
+\
+
+✔ Convierte saltos de línea del Excel en:
+\newline
+✔ Limpia líneas vacías
+🧩 Integración en tu Tesis
+
+En tu documento principal:
+
 \usepackage{longtable}
 \usepackage{array}
 
-\geometry{margin=2.5cm}
-
-% Configuración para tablas
 \setlength{\LTpre}{1em}
 \setlength{\LTpost}{1em}
 \renewcommand{\arraystretch}{1.3}
-```
 
-### Incluir los Requerimientos
+Luego:
 
-```latex
 \chapter{Especificación de Requerimientos}
 
 \section{Requerimientos Funcionales}
-Los requerimientos funcionales definen las funcionalidades específicas
-que debe proporcionar el sistema...
-
-\input{ruta/a/requerimientos_funcionales.tex}
+\input{latex_output_final/requerimientos_funcionales.tex}
 
 \newpage
+
 \section{Requerimientos No Funcionales}
-Los requerimientos no funcionales establecen las restricciones y 
-cualidades del sistema...
+\input{latex_output_final/requerimientos_no_funcionales.tex}
+📊 Flujo Completo
+Excel / Google Sheets
+        ↓
+Script python
+        ↓
+Archivos .tex
+        ↓
+pdflatex
+        ↓
+PDF listo para tesis
+🛠 Personalización de Columnas
 
-\input{ruta/a/requerimientos_no_funcionales.tex}
-```
+Si deseas modificar el ancho de columnas:
 
-## 🎨 Personalización
+En el script:
 
-### Cambiar Ancho de Columnas
+\begin{longtable}{|p{0.28\textwidth}|p{0.67\textwidth}|}
 
-En el script `excel_to_latex_fixed.py`, línea ~92:
+Puedes cambiar a:
 
-```python
-latex_code.append(r"\begin{longtable}{|p{0.28\textwidth}|p{0.67\textwidth}|}")
-#                                        ^^^^              ^^^^
-#                                   Columna 1         Columna 2
-```
+0.25 / 0.70 → Más espacio para contenido
 
-Valores recomendados:
-- **0.28 y 0.67**: Balance (actual)
-- **0.25 y 0.70**: Más espacio para contenido
-- **0.30 y 0.65**: Más espacio para etiquetas
+0.30 / 0.65 → Más espacio para etiquetas
 
-### Agregar Campos Personalizados
+⚠️ Errores Comunes
+❌ "No se pudo interpretar el archivo"
 
-Si tu Excel tiene campos adicionales:
+Revisa:
 
-```python
-# En la función generate_requirement_table_longtable()
-# Agregar después de Estabilidad:
+Que el ID de Drive esté bien copiado
 
-if 'Mi_Campo_Nuevo' in row.index and not pd.isna(row.get('Mi_Campo_Nuevo', '')):
-    mi_campo = format_text_with_linebreaks(row['Mi_Campo_Nuevo'])
-    latex_code.append(r"\textbf{Mi Campo:} & " + mi_campo + r" \\")
-    latex_code.append(r"\hline")
-```
+Que el archivo esté compartido públicamente
 
-## 🐛 Solución de Problemas
+❌ Underfull \hbox
 
-### Problema: "Underfull \hbox" warnings
+Solo advertencia visual. No afecta el PDF.
 
-**Causa**: LaTeX no puede justificar bien el texto en columnas estrechas
+❌ Caracteres raros
 
-**Solución**: Esto es solo una advertencia, no afecta el PDF. Para reducirlas:
-```latex
-\usepackage{ragged2e}
-% Usar \RaggedRight en columnas
-```
+Asegúrate de tener:
 
-### Problema: Tabla muy ancha
-
-**Causa**: Contenido muy largo en alguna celda
-
-**Solución**: Ajustar anchos de columna o usar `\small` en el contenido:
-```python
-latex_code.append(r"\small " + texto + r" \normalsize \\")
-```
-
-### Problema: Caracteres especiales se ven mal
-
-**Causa**: Problemas de codificación
-
-**Solución**: El script ya maneja UTF-8. Si persiste:
-```latex
 \usepackage[utf8]{inputenc}
-```
+📌 Recomendaciones
 
-## 📈 Estadísticas del Procesamiento
+Ejecuta pdflatex dos veces
 
-```
-Archivo procesado: ERS-SGPI.xlsx
-├── Requerimientos Funcionales: 41
-├── Requerimientos No Funcionales: 13
-├── Total de requerimientos: 54
-└── Páginas generadas: 106
-```
+Guarda respaldo del Excel
 
-## 💡 Mejores Prácticas
+Usa control de versiones (Git)
 
-1. **Siempre ejecuta pdflatex dos veces** para que las referencias cruzadas funcionen
-2. **Revisa el PDF generado** antes de incluirlo en tu tesis
-3. **Guarda una copia del Excel original** antes de hacer cambios
-4. **Usa control de versiones** (Git) para el Excel y los .tex generados
-5. **Compila regularmente** para detectar problemas temprano
+No edites manualmente los .tex generados
 
-## 🔄 Actualizar después de Cambios en el Excel
+🎓 Ideal para
 
-```bash
-# 1. Edita tu archivo Excel
-# 2. Regenera los archivos LaTeX
-python3 excel_to_latex.py ERS-SGPI.xlsx latex_output_fixed
+Tesis
 
-# 3. Recompila el PDF
-cd latex_output_fixed
-pdflatex todos_los_requerimientos.tex
-pdflatex todos_los_requerimientos.tex
-```
+SRS IEEE 830
 
-## 📧 Notas Importantes
+Documentación académica
 
-- ✅ Este script está optimizado para el formato de tu Excel específico
-- ✅ Los saltos de línea ahora funcionan correctamente
-- ✅ Las tablas no se cortan en los pies de página
-- ✅ El espaciado es profesional y legible
-- ✅ Compatible con tesis y documentos académicos
+Proyectos de Ingeniería de Software
 
-## 🎓 Ejemplo Real
+Entregables formales
 
-Ver el archivo **`ejemplo_mejoras.pdf`** incluido para ver:
-- Comparación antes/después
-- Explicación de las correcciones
-- Ejemplos de uso de longtable
-- Guía de integración en tesis
+🏁 Versión
 
----
-
-**Versión del Script**: 3.0 (Corregida)  
-**Última actualización**: Febrero 2026  
-**Archivo procesado**: ERS-SGPI.xlsx  
-**Resultado**: 106 páginas de requerimientos profesionales
+Script: excel_drive_a_latex.py
+Versión: 5.0
+Soporte: Excel local + Google Drive + Google Sheets
+Salida: Tablas LaTeX con longtable
+Compatibilidad: Tesis académicas
