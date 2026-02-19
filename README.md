@@ -39,13 +39,13 @@ sudo apt-get install texlive-latex-base texlive-latex-extra
 
 ```bash
 # Sintaxis básica
-python3 excel_to_latex_fixed.py <archivo_excel> [directorio_salida]
+python3 excel_to_latex.py <archivo_excel> [directorio_salida]
 
 # Ejemplo con tu archivo
-python3 excel_to_latex_fixed.py ERS-SGPI.xlsx mi_tesis/requerimientos/
+python3 excel_to_latex.py ERS-SGPI.xlsx mi_tesis/requerimientos/
 
 # Usar directorio por defecto (latex_output_fixed/)
-python3 excel_to_latex_fixed.py ERS-SGPI.xlsx
+python3 excel_to_latex.py ERS-SGPI.xlsx
 ```
 
 ### Compilar a PDF
@@ -265,7 +265,7 @@ Archivo procesado: ERS-SGPI.xlsx
 ```bash
 # 1. Edita tu archivo Excel
 # 2. Regenera los archivos LaTeX
-python3 excel_to_latex_fixed.py ERS-SGPI.xlsx latex_output_fixed
+python3 excel_to_latex.py ERS-SGPI.xlsx latex_output_fixed
 
 # 3. Recompila el PDF
 cd latex_output_fixed
