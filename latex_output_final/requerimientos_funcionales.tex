@@ -1,0 +1,257 @@
+% Requerimientos Funcionales
+% Generado automáticamente desde Excel
+
+\begin{longtable}{|p{0.28\textwidth}|p{0.67\textwidth}|}
+\caption{Ingresar al sistema} \label{tab:rf-us-1} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continuación}} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\textit{Continúa en la siguiente página}} \\
+\endfoot
+\hline
+\endlastfoot
+\textbf{Id del requerimiento:} & RF-US-1 \\
+\hline
+\textbf{Nombre:} & Ingresar al sistema \\
+\hline
+\textbf{Descripción:} & El sistema permitirá a los usuarios acceder a las funcionalidades correspondientes una vez que se autentiquen correctamente mediante sus credenciales. \\
+\hline
+\textbf{Datos de entrada:} & Correo electrónico \newline Contraseña \\
+\hline
+\textbf{Datos de salida:} & Éxito: Mensaje: "Bienvenido <Nombre del usuario>". \newline Error: Mensaje: "Credenciales inválidas". \\
+\hline
+\textbf{Pre-condiciones:} & Usuario resgistrado en el sistema \\
+\hline
+\textbf{Post-condiciones:} & Usuario con token de sesión activo \\
+\hline
+\textbf{Proceso:} & 1. El usuario accede al url del sistema. \newline 2. El ususario introduce sus credenciales de acceso (correo electrónico y contraseña). \newline 3. El usuario presiona el botón de ingresar. \newline 4. El sistema le da la bienvenida y lo redirige a la pagina de inicio acordeasu rol de usuario (Administrador e invitado) \\
+\hline
+\textbf{Prioridad:} & Critica \\
+\hline
+\textbf{Estabilidad:} & Alta \\
+\hline
+\textbf{Fuente del requerimiento:} & Entrevista \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm}
+
+\begin{longtable}{|p{0.28\textwidth}|p{0.67\textwidth}|}
+\caption{Registrar Usuario} \label{tab:rf-1-1} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continuación}} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\textit{Continúa en la siguiente página}} \\
+\endfoot
+\hline
+\endlastfoot
+\textbf{Id del requerimiento:} & RF-1.1 \\
+\hline
+\textbf{Nombre:} & Registrar Usuario \\
+\hline
+\textbf{Descripción:} & Permite al usuario con rol de administrador registrar un nuevo usuario y asignarle un rol. \\
+\hline
+\textbf{Datos de entrada:} & name | Texto | Requerido | Máx. 255 caracteres \newline lastName | Texto | Requerido | Máx. 255 caracteres \newline email | Texto | Requerido | Único en el sistema, formato de correo válido \newline password | Texto | Requerido | Máx. 255 caracteres \newline comite | Texto | No requerido | Máx. 255 caracteres, opcional \newline code | Texto | No requerido | Máx. 20 caracteres, opcional \\
+\hline
+\textbf{Datos de salida:} & Éxito: Mensaje: "El usuario ha sido registrado correctamente". \newline Error: "El correo electrónico ya está registrado", "Formato de correo inválido". \\
+\hline
+\textbf{Pre-condiciones:} & Usuario administrador autenticado. \\
+\hline
+\textbf{Post-condiciones:} & Nuevo registro de usuario creado en la base de datos \\
+\hline
+\textbf{Proceso:} & 1- Inicio: El Administrador accede a la opción de crear usuario. \newline 2- Entrada de datos: Ingresa nombre, apellidos, email, contraseña y opcionalmente comité y código. \newline 3- Validación: El sistema verifica que el email no esté duplicado y tenga un formato válido. \newline 4- Procesamiento: Si los datos son correctos, el sistema crea el registro en la base de datos y asigna el rol. \newline 5- Resultado: Muestra el mensaje "El usuario ha sido registrado correctamente". (Si hay error, indica que el correo ya existe o es inválido). \\
+\hline
+\textbf{Proceso Alternativo:} & * Caso A: Correo electrónico duplicado \newline 1- Validación: El sistema detecta que el email ingresado ya existe en la base de datos. \newline 2- Resultado: Se detiene el registro y muestra el error: "El correo electrónico ya está registrado". \newline * Caso B: Formato inválido \newline 1- Validación: El sistema detecta que el email no cumple con la estructura estándar (ej. falta @). \newline 2- Resultado: Muestra el error: "Formato de correo inválido". \\
+\hline
+\textbf{Prioridad:} & Critica \\
+\hline
+\textbf{Estabilidad:} & Alta \\
+\hline
+\textbf{Fuente del requerimiento:} & Entrevista \\
+\hline
+\textbf{Requerimientos relacionados:} & RF-1 \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm}
+
+\begin{longtable}{|p{0.28\textwidth}|p{0.67\textwidth}|}
+\caption{Consultar Usuarios} \label{tab:rf-1-2} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continuación}} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\textit{Continúa en la siguiente página}} \\
+\endfoot
+\hline
+\endlastfoot
+\textbf{Id del requerimiento:} & RF-1.2 \\
+\hline
+\textbf{Nombre:} & Consultar Usuarios \\
+\hline
+\textbf{Descripción:} & Permite al usuario con rol de administrador consultar los usuarios registrados en el sistema. \\
+\hline
+\textbf{Datos de entrada:} & page | Número Entero | No requerido | Positivo (>0). Valor por defecto: 1 \newline take | Número Entero | No requerido | Positivo (>0). Valor por defecto: 20 \\
+\hline
+\textbf{Datos de salida:} & Éxito: Una lista paginada de los usuarios registrados con sus datos. \newline Error: "No se encontraron usuarios que coincidan con la búsqueda". \\
+\hline
+\textbf{Pre-condiciones:} & Usuario administrador autenticado. \\
+\hline
+\textbf{Post-condiciones:} & Ninguna \\
+\hline
+\textbf{Proceso:} & 1- Inicio: El Administrador solicita ver el listado de usuarios. \newline 2- Entrada de datos: El sistema recibe los parámetros de paginación (page, take). \newline 3- Procesamiento: El sistema busca en la base de datos los usuarios registrados según la paginación solicitada. \newline 4- Resultado: Despliega una lista paginada con los datos de los usuarios (Si no hay, muestra mensaje de búsqueda sin resultados). \\
+\hline
+\textbf{Proceso Alternativo:} & * Caso A: Sin resultados \newline 1- Procesamiento: El sistema realiza la búsqueda en la base de datos y no encuentra registros que coincidan con los criterios o la página solicitada. \newline 2- Resultado: Muestra el mensaje: "No se encontraron usuarios que coincidan con la búsqueda". \\
+\hline
+\textbf{Prioridad:} & Critica \\
+\hline
+\textbf{Estabilidad:} & Alta \\
+\hline
+\textbf{Fuente del requerimiento:} & Entrevista \\
+\hline
+\textbf{Requerimientos relacionados:} & RF-1, RF-1.1 \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm}
+
+\begin{longtable}{|p{0.28\textwidth}|p{0.67\textwidth}|}
+\caption{Actualizar Usuario} \label{tab:rf-1-3} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continuación}} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\textit{Continúa en la siguiente página}} \\
+\endfoot
+\hline
+\endlastfoot
+\textbf{Id del requerimiento:} & RF-1.3 \\
+\hline
+\textbf{Nombre:} & Actualizar Usuario \\
+\hline
+\textbf{Descripción:} & Permite al usuario con rol de administrador modificar información de los usuarios registrados en el sistema. \\
+\hline
+\textbf{Datos de entrada:} & id | Numero Entero | Requerido \newline name | Texto | No Requerido | Máx. 255 caracteres \newline lastName | Texto | Requerido | Máx. 255 caracteres \newline email | Texto | No Requerido | Único en el sistema, formato de correo válido \newline comite | Texto | No requerido | Máx. 255 caracteres, opcional \newline code | Texto | No requerido | Máx. 20 caracteres, opcional \\
+\hline
+\textbf{Datos de salida:} & Éxito: Mensaje: "El usuario se ha actualizado correctamente". \newline Error: "El usuario no existe", "El correo electrónico ya está en uso". \\
+\hline
+\textbf{Pre-condiciones:} & Usuario administrador autenticado y el usuario a editar debe existir. \\
+\hline
+\textbf{Post-condiciones:} & Información del usuario actualizada correctamente en la base de datos \\
+\hline
+\textbf{Proceso:} & 1- Inicio: El Administrador selecciona un usuario existente para editar. \newline 2- Entrada de datos: Proporciona el ID del usuario y modifica los campos necesarios (nombre, apellidos, email, etc.). \newline 3- Validación: El sistema verifica que el usuario exista y que, si se cambió el email, este no pertenezca a otro usuario. \newline 4- Procesamiento: Se actualiza la información en la base de datos. \newline 5- Resultado: Muestra el mensaje "El usuario se ha actualizado correctamente". \\
+\hline
+\textbf{Proceso Alternativo:} & * Caso A: Usuario no encontrado \newline 1- Validación: El sistema busca el ID proporcionado y no encuentra coincidencia. \newline 2- Resultado: Muestra el error: "El usuario no existe". \newline * Caso B: Conflicto de correo (Duplicado) \newline 1- Validación: El usuario intenta cambiar su correo por uno que ya pertenece a otro usuario registrado. \newline 2- Resultado: Muestra el error: "El correo electrónico ya está en uso". \\
+\hline
+\textbf{Prioridad:} & Critica \\
+\hline
+\textbf{Estabilidad:} & Alta \\
+\hline
+\textbf{Fuente del requerimiento:} & Entrevista \\
+\hline
+\textbf{Requerimientos relacionados:} & RF-1, RF-1.1, RF-1.2 \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm}
+
+\begin{longtable}{|p{0.28\textwidth}|p{0.67\textwidth}|}
+\caption{Eliminar Usuario} \label{tab:rf-1-4} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continuación}} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\textit{Continúa en la siguiente página}} \\
+\endfoot
+\hline
+\endlastfoot
+\textbf{Id del requerimiento:} & RF-1.4 \\
+\hline
+\textbf{Nombre:} & Eliminar Usuario \\
+\hline
+\textbf{Descripción:} & Permite al usuario con rol de administrador eliminar usuarios del sistema. \\
+\hline
+\textbf{Datos de entrada:} & id | Numero Entero | Requerido \\
+\hline
+\textbf{Datos de salida:} & Éxito: Mensaje: "El usuario se ha eliminado correctamente". \newline Error: "El usuario no existe", "Ocurrió un error al intentar eliminar". \\
+\hline
+\textbf{Pre-condiciones:} & Usuario administrador autenticado y el usuario a eliminar debe existir. \\
+\hline
+\textbf{Post-condiciones:} & Registro de usuario eliminado (baja lógica) de la base de datos \\
+\hline
+\textbf{Proceso:} & 1- Inicio: El Administrador selecciona un usuario para dar de baja. \newline 2- Entrada de datos: El sistema recibe el ID del usuario. \newline 3- Validación: Verifica que el usuario exista en el sistema. \newline 4- Procesamiento: Realiza una baja lógica en la base de datos (no se borra físicamente, pero queda inhabilitado). \newline 5- Resultado: Muestra el mensaje "El usuario se ha eliminado correctamente". \\
+\hline
+\textbf{Proceso Alternativo:} & * Caso A: Usuario inexistente \newline 1- Validación: El sistema intenta localizar el ID para dar de baja y no lo encuentra. \newline 2- Resultado: Muestra el error: "El usuario no existe". \newline * Caso B: Error en la operación \newline 1- Procesamiento: Ocurre un fallo en la base de datos al intentar actualizar el estado a inactivo. \newline 2- Resultado: Muestra el error: "Ocurrió un error al intentar eliminar". \\
+\hline
+\textbf{Prioridad:} & Critica \\
+\hline
+\textbf{Estabilidad:} & Alta \\
+\hline
+\textbf{Fuente del requerimiento:} & Entrevista \\
+\hline
+\textbf{Requerimientos relacionados:} & RF-1, RF-1.1, RF-1.2, RF-1.3 \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm}
+
+\begin{longtable}{|p{0.28\textwidth}|p{0.67\textwidth}|}
+\caption{Ingresar al sistema} \label{tab:rf-1-5} \\
+\hline
+\endfirsthead
+\multicolumn{2}{c}%
+{\tablename\ \thetable\ -- \textit{Continuación}} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\textit{Continúa en la siguiente página}} \\
+\endfoot
+\hline
+\endlastfoot
+\textbf{Id del requerimiento:} & RF-1.5 \\
+\hline
+\textbf{Nombre:} & Ingresar al sistema \\
+\hline
+\textbf{Descripción:} & Permite al usuario ingresar al sistema con sus credenciales válidas, y obtener los permisos dependiendo el rol que tiene asignado. \\
+\hline
+\textbf{Datos de entrada:} & email | Texto | Requerido | formato de correo valido \newline password | Texto | Requerido \\
+\hline
+\textbf{Datos de salida:} & Éxito: Token de autenticación válido para la sesión. \newline Error: "Credenciales inválidas", "Usuario bloqueado". \\
+\hline
+\textbf{Pre-condiciones:} & Ninguna. \\
+\hline
+\textbf{Post-condiciones:} & Ninguna \\
+\hline
+\textbf{Proceso:} & 1- Inicio: El usuario accede a la pantalla de inicio de sesión. \newline 2- Entrada de datos: Ingresa su email y password. \newline 3- Validación: El sistema compara las credenciales con la base de datos y verifica que el usuario no esté bloqueado. \newline 4- Procesamiento: Genera un token de autenticación y determina los permisos según el rol. \newline 5- Resultado: Permite el acceso al sistema. \\
+\hline
+\textbf{Proceso Alternativo:} & * Caso A: Datos incorrectos \newline 1- Validación: La contraseña no coincide con el hash almacenado o el correo no existe. \newline 2- Resultado: Muestra el error: "Credenciales inválidas". \newline * Caso B: Usuario restringido \newline 1- Validación: Las credenciales son correctas, pero el campo de estado del usuario es "Inactivo" o "Baja". \newline 2- Resultado: Muestra el error: "Usuario bloqueado". \\
+\hline
+\textbf{Prioridad:} & Critica \\
+\hline
+\textbf{Estabilidad:} & Alta \\
+\hline
+\textbf{Fuente del requerimiento:} & Entrevista \\
+\hline
+\textbf{Requerimientos relacionados:} & RF-1, RF-1.1, RF-1.2, RF-1.3, RF-1.4 \\
+\hline
+\end{longtable}
+
+\vspace{0.5cm}
+
